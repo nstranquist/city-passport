@@ -12,8 +12,8 @@ const App = () => {
   const updateProfile = (formData) => {
     setProfileData({
       name: formData.name,
-      //age: ,
-      //city: ,
+      age: formData.age,
+      city: formData.city,
     })
     console.log('profile data:', profileData)
   }
