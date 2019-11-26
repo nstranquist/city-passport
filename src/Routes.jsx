@@ -1,17 +1,17 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 // import components
-// import Profile from './components/Profile'
-import Categories from './components/Categories'
-import CategoryDetail from './components/CategoryDetail'
+import Home from './components/Home'
 
 export const PassportRoutes = ({
-  MyProfile
+  MyProfile,
+  MyCategories,
 }) => (
   <Switch>
+    <Route exact path='/home' component={Home} />
     <Route exact path='/profile' component={MyProfile} />
-    <Route exact path='/categories' component={Categories} />
+    <Route exact path='/categories' component={MyCategories} />
     {/* <Route path='/categories/:detail' render={(props) => <CategoriesDetail {...props} />} />  can use match.params */}
-    <Route path='/' render={() => <Redirect to='/categories' />} />
+    <Route path='/' render={() => <Redirect to='/home' />} />
   </Switch>
 )

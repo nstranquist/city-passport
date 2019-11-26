@@ -1,11 +1,14 @@
 import React from 'react'
 
 
-// display all of our categories
-const Categories = () => {
+// list all categories. display some information like the title, stamps count, and if it's a favorite
+const Categories = ({
+  categoriesData
+}) => {
   return (
     <div>
-      Categories
+      <h3>Categories:</h3>
+
     </div>
   )
 }
