@@ -13,7 +13,7 @@ const Categories = ({
       <h3>Categories:</h3>
       <ul style={{listStyle:'none', padding: '10px'}}>
         {categoriesData.map((category, index) => (
-          <CategoryDetail key={index} category={category} />
+          <CategoryDetail key={index} category={category} setFavorite={setFavorite} />
         ))}
       </ul>
     </div>

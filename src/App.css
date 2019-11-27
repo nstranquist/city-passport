@@ -89,9 +89,10 @@
 /* Categories Section */
 
 .category-card {
+  margin-bottom: 20px;
   padding: 10px 2%;
   background: white;
-  border-radius: 15%;
+  border-radius: 5px;
   border: 1px solid rgba(0,0,0,.05);
 }
 .card-header {

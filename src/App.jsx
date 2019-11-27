@@ -5,6 +5,7 @@ import { PassportRoutes } from './Routes'
 // import components
 import Profile from './components/Profile'
 import Categories from './components/Categories'
+import Home from './components/Home'
 
 import './App.css'
 
@@ -13,7 +14,16 @@ const categories = [
     id: uuidv4(),
     name: 'Coffee',
     description: 'Get your caffeine rush flowing!',
-    stamps: [],
+    stamps: [
+      {
+        name: 'Starbucks',
+        location: 'downtown',
+      },
+      {
+        name: 'Kaldis Coffee',
+        location: 'central west end'
+      }
+    ],
     isFavorite: false,
   },
   {
@@ -51,12 +61,33 @@ const App = () => {
     })
     console.log('profile data:', profileData)
   }
-  const setFavorite = (categoryId) => {
-    // find category by id in our categoriesData array
 
-    // update category 'isFavorite' property
+  const setFavorite = (id) => {
+    let newCategories = []
+    categoriesData.map(category => {
+      if(category.id === id) {
+        let selected = category // watch for shallow copy
+        console.log('selected:', selected, 'name:',selected.name)
+        selected.isFavorite = !selected.isFavorite
+        newCategories.push(selected)
+      }
+      else newCategories.push(category)
+    })
+    console.log('new categories:', newCategories)
+    setCategoriesData(newCategories)
+  }
+  const getFavorites = () => {
+    return categoriesData.filter(category => {
+      if(category.isFavorite) {
+        return {
+          id: category.id,
+          name: category.name
+        }
+      }
+    })
   }
 
+  // TODO: move component creators to a utility function (or the component they create)
   const MyProfile = (props) => {
     return (
       <Profile 
@@ -66,12 +97,19 @@ const App = () => {
       />
     )
   }
-
   const MyCategories = (props) => {
     return (
       <Categories
         setFavorite={setFavorite}
         categoriesData={categoriesData}
+        {...props}
+      />
+    )
+  }
+  const MyHome = (props) => {
+    return (
+      <Home
+        favorites={getFavorites()}
         {...props}
       />
     )
@@ -87,13 +125,13 @@ const App = () => {
             <Link to='/home' className='nav-link'>Home</Link>
             <Link to='/categories' className='nav-link'>Categories</Link>
             <Link to='/profile' className='nav-link'>Profile</Link>
-            
+
             {/* Can toggle a dropdown, shortcut to logout, settings, donate, etc */}
             <div className="circle-profile nav-link" style={{cursor:'pointer'}}></div>
           </nav>
         </header>
         <div className="content-view">
-          <PassportRoutes MyProfile={MyProfile} MyCategories={MyCategories} />
+          <PassportRoutes MyProfile={MyProfile} MyCategories={MyCategories} MyHome={MyHome} />
         </div>
       </main>
     </div>
