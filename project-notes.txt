@@ -1,0 +1,35 @@
+City Passport Project:
+
+profile:
+- name
+- age
+- city
+
+categories:
+- coffee[],
+- food (breakfast/lunch/dinner/other),
+- music
+- attractions
+
+- Stamp View to display stamp object
+
+stamp object: {
+- id: unique id (npm uuid)
+- name: string, name of venue
+- category: string, one of the 4 categories, can change and move accross
+- date: timestamp (javascript Date() api)
+}
+
+State:
+    Array of arrays, each array is an array of objects
+
+No redux, just using local state.
+I could use hooks or this.state
+hooks
+
+TODO: add svg-url-loader for svgs
+
+Fun future idea:
+add a map of a city, add places you can go to to stamp this passport.
+It will check against your profile data to tell you if you can or can't go there,
+maybe even give a certain stamp limit for places, or give rewards for going to certain places and getting stamped there
