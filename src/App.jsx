@@ -16,28 +16,65 @@ const categories = [
     description: 'Get your caffeine rush flowing!',
     stamps: [
       {
+        id: uuidv4(),
         name: 'Starbucks',
+        // do we need a category for every stamp?
+        category: 'Coffee',
         location: 'downtown',
+        date: new Date(),
       },
       {
+        id: uuidv4(),
         name: 'Kaldis Coffee',
-        location: 'central west end'
+        category: 'Coffee',
+        location: 'central west end',
+        date: new Date(),
+      }
+    ],
+    isFavorite: true,
+  },
+  {
+    id: uuidv4(),
+    name: 'Food',
+    description: 'Get your favorite eats stamped',
+    stamps: [
+      {
+        id: uuidv4(),
+        name: 'Starbucks',
+        category: 'Food',
+        location: 'downtown',
+        date: new Date(),
+      },
+      {
+        id: uuidv4(),
+        name: 'Kaldis Coffee',
+        category: 'Food',
+        location: 'central west end',
+        date: new Date(),
       }
     ],
     isFavorite: false,
   },
   {
     id: uuidv4(),
-    name: 'Food',
-    description: 'Get your favorite eats stamped',
-    stamps: [],
-    isFavorite: false,
-  },
-  {
-    id: uuidv4(),
     name: 'Music',
     description: 'Concerts, Radios, and more! Music can help define the culture of a city',
-    stamps: [],
+    stamps: [
+      {
+        id: uuidv4(),
+        name: 'Starbucks',
+        category: 'Music',
+        location: 'downtown',
+        date: new Date(),
+      },
+      {
+        id: uuidv4(),
+        name: 'Kaldis Coffee',
+        category: 'Music',
+        location: 'central west end',
+        date: new Date(),
+      }
+    ],
     isFavorite: false,
   },
   {
@@ -86,6 +123,14 @@ const App = () => {
       }
     })
   }
+  const getStamps = () => {
+    let stamps = 'stamps loading'
+    stamps = categoriesData.map(category => {
+      if(category.stamps.length > 0)
+        return category.stamps
+    })
+    return stamps
+  }
 
   // TODO: move component creators to a utility function (or the component they create)
   const MyProfile = (props) => {
@@ -110,11 +155,13 @@ const App = () => {
     return (
       <Home
         favorites={getFavorites()}
+        stamps={getStamps()}
         {...props}
       />
     )
   }
 
+  // TODO: use match.params to set header title according to our current page
   return (
     <div className="page-container">
       <main className="content-container">
