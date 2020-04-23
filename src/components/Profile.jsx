@@ -1,57 +1,63 @@
-import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
 
 
-const Profile = ({
-  updateProfile,
-  profileData
-}) => {
+import React, { useState, useEffect } from 'react'
+
+
+const emptyProfileForm = {
+  name: "",
+  age: 0,
+  city: ""
+}
+
+const Profile = () => {
   // TODO: combine to one state object, implement useEffect() and memoization
-  const [nameInput, setNameInput] = useState('')
-  const [ageInput, setAgeInput] = useState(0)
-  const [cityInput, setCityInput] = useState('')
+  const [profileData, setProfileData] = useState(emptyProfileForm)
 
-  // add useEffect(() => {  }, [])  here
+  useEffect(() => {
+    // make api call
+
+      // then:
+      // updateProfileData();
+  }, [])
 
   // TODO: could optimize function to take all 3 inputs
-  const handleNameChange = (event) => setNameInput(event.target.value)
-  const handleAgeChange = (event) => setAgeInput(event.target.value)
-  const handleCityChange = (event) => setCityInput(event.target.value)
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('name input:', nameInput)
-
-    updateProfile({
-      name: nameInput,
-      age: ageInput,
-      city: cityInput
+  const handleChange = (e, name) => {
+    setProfileData({
+      ...profileData,
+      [name]: e.target.value
     })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    // error check if needed
+
+    // submit data
+    console.log('form data:', profileData.toString())
 
     clearForm()
   }
 
   const clearForm = () => {
-    setNameInput('')
-    setAgeInput(0)
-    setCityInput('')
+    setProfileData(emptyProfileForm)
   }
 
   return (
-    <div>
+    <div className="profile-page">
       <h3>Profile</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-item">
           <label>Enter your name</label>
-          <input type="text" value={nameInput} onChange={(event) => handleNameChange(event)} />
+          <input type="text" value={profileData.name} onChange={(e) => handleChange(e, "name")} />
         </div>
         <div className="form-item">
           <label>Enter your age</label>
-          <input type="number" value={ageInput} onChange={(event) => handleAgeChange(event)} />
+          <input type="number" value={profileData.age} onChange={(e) => handleChange(e, "age")} />
         </div>
         <div className="form-item">
           <label>Enter your city</label>
-          <input type="text" value={cityInput} onChange={(event) => handleCityChange(event)} />
+          <input type="text" value={profileData.city} onChange={(e) => handleChange(e, "city")} />
         </div>
         <button type="submit">Update</button>
       </form>
